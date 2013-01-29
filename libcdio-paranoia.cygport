@@ -1,0 +1,45 @@
+NAME="libcdio-paranoia"
+VERSION=10.2+0.90
+RELEASE=1
+CATEGORY="Audio"
+SUMMARY="CD-ROM control library"
+DESCRIPTION="This CDDA reader distribution reads audio from the CD-ROM directly
+as data, with no analog step between, and writes the data to a file or pipe as
+.wav, .aifc or as raw 16 bit linear PCM."
+HOMEPAGE="http://www.gnu.org/software/libcdio/"
+SRC_URI="mirror://gnu/libcdio/${P}.tar.gz"
+PATCH_URI="10.2-compat.patch"
+
+PKG_NAMES="cdparanoia libcdio_cdda1 libcdio_paranoia1 libcdio_paranoia-devel"
+cdparanoia_CONTENTS="usr/bin/cd-* usr/share/doc/ usr/share/man/"
+libcdio_cdda1_SUMMARY="${SUMMARY} (CD-DA runtime)"
+libcdio_cdda1_CONTENTS="usr/bin/cygcdio_cdda-1.dll"
+libcdio_paranoia1_SUMMARY="${SUMMARY} (CD-Paranoia runtime)"
+libcdio_paranoia1_CONTENTS="usr/bin/cygcdio_paranoia-1.dll"
+libcdio_paranoia_devel_SUMMARY="${SUMMARY} (CD-Paranoia development)"
+libcdio_paranoia_devel_CONTENTS="usr/include/ usr/lib/"
+
+DIFF_EXCLUDES="check_paranoia.sh"
+
+CYGCONF_ARGS="
+	--disable-example-progs
+	--enable-vcd-info
+	--without-versioned-libs
+"
+CPPFLAGS="-I/usr/include/ncurses"
+
+src_install() {
+	cd ${B}
+	cyginstall libcdioincludedir=/usr/include/cdio/paranoia
+
+	# for compatibility with 0.8x versions
+	echo "#include <cdio/paranoia/cdda.h>" >> ${D}/usr/include/cdio/cdda.h
+	echo "#include <cdio/paranoia/paranoia.h>" >> ${D}/usr/include/cdio/paranoia.h
+	# for compatibility with cdparanoia
+	echo "#include <cdio/paranoia/cdda.h>" >> ${D}/usr/include/cdda_interface.h
+	echo "#include <cdio/paranoia/paranoia.h>" >> ${D}/usr/include/cdda_paranoia.h
+	dosym libcdio_cdda.dll.a /usr/lib/libcdda_interface.dll.a
+	dosym libcdio_paranoia.dll.a /usr/lib/libcdda_paranoia.dll.a
+}
+
+KEEP_LA_FILES="none"
