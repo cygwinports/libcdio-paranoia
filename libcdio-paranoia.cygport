@@ -1,5 +1,5 @@
 NAME="libcdio-paranoia"
-VERSION=10.2+0.90
+VERSION=10.2+0.93+1
 RELEASE=1
 CATEGORY="Audio"
 SUMMARY="CD-ROM control library"
@@ -10,16 +10,16 @@ HOMEPAGE="http://www.gnu.org/software/libcdio/"
 SRC_URI="mirror://gnu/libcdio/${P}.tar.gz"
 PATCH_URI="10.2-compat.patch"
 
-PKG_NAMES="cdparanoia libcdio_cdda1 libcdio_paranoia1 libcdio_paranoia-devel"
+PKG_NAMES="cdparanoia libcdio_cdda2 libcdio_paranoia2 libcdio_paranoia-devel"
 cdparanoia_CONTENTS="usr/bin/cd-* usr/share/doc/ usr/share/man/"
-libcdio_cdda1_SUMMARY="${SUMMARY} (CD-DA runtime)"
-libcdio_cdda1_CONTENTS="usr/bin/cygcdio_cdda-1.dll"
-libcdio_paranoia1_SUMMARY="${SUMMARY} (CD-Paranoia runtime)"
-libcdio_paranoia1_CONTENTS="usr/bin/cygcdio_paranoia-1.dll"
+libcdio_cdda2_SUMMARY="${SUMMARY} (CD-DA runtime)"
+libcdio_cdda2_CONTENTS="usr/bin/cygcdio_cdda-2.dll"
+libcdio_paranoia2_SUMMARY="${SUMMARY} (CD-Paranoia runtime)"
+libcdio_paranoia2_CONTENTS="usr/bin/cygcdio_paranoia-2.dll"
 libcdio_paranoia_devel_SUMMARY="${SUMMARY} (CD-Paranoia development)"
 libcdio_paranoia_devel_CONTENTS="usr/include/ usr/lib/"
 
-DIFF_EXCLUDES="check_paranoia.sh"
+DIFF_EXCLUDES="check_paranoia.sh toc.c"
 
 CYGCONF_ARGS="
 	--disable-example-progs
