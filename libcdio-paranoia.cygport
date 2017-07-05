@@ -1,5 +1,5 @@
 NAME="libcdio-paranoia"
-VERSION=10.2+0.93+1
+VERSION=10.2+0.94+1
 RELEASE=1
 CATEGORY="Audio"
 SUMMARY="CD-ROM control library"
@@ -26,7 +26,6 @@ CYGCONF_ARGS="
 	--enable-vcd-info
 	--without-versioned-libs
 "
-CPPFLAGS="-I/usr/include/ncurses"
 
 src_install() {
 	cd ${B}
